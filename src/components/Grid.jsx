@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { socket } from "../socket";
 import "../style.css"
 
-const tileSize = 30;
+const tileSize = 12;
 
 const colors = [
   "#ffffff", // white
@@ -42,7 +42,6 @@ export default function Grid() {
   }, []);
 
   function handleClickGrid(pos) {
-    console.log(pos);
     socket.emit("send-grid", pos);
   }
 
@@ -79,8 +78,8 @@ export default function Grid() {
                 key={`${indexLine}-${indexTile}`}
                 onClick={() =>
                   handleClickGrid({
-                    x: indexTile,
-                    y: indexLine,
+                    x: indexLine,
+                    y: indexTile,
                     color: selectedColor,
                   })
                 }
@@ -88,7 +87,7 @@ export default function Grid() {
                 style={{
                   width: tileSize,
                   height: tileSize,
-                  backgroundColor: colors[grid[indexTile][indexLine]],
+                  backgroundColor: colors[grid[indexLine][indexTile]],
                 }}
               ></div>
             ));
