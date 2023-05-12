@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { socket } from "../socket";
-import "../style.css"
-
-const tileSize = 12;
+import "../style.css";
 
 const colors = [
   "#ffffff", // white
@@ -48,18 +46,24 @@ export default function Grid() {
   return (
     <div>
       <div
-        style={{ display: "flex", flexDirection: "row", gap: 10, margin: 10 }}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 10,
+          margin: "10px 0",
+          flexWrap: "wrap",
+        }}
       >
         {colors.map((color, index) => (
           <div
+            className={
+              index === selectedColor ? "colorTile selectedColorTile" : "colorTile"
+            }
             key={index}
             onClick={() => setSelectedColor(index)}
-            style={{
-              backgroundColor: color,
-              height: 20,
-              width: 20,
-              outline: selectedColor === index ? "3px solid black" : "1px solid black",
-            }}
+            style={{ backgroundColor: color }}
           ></div>
         ))}
       </div>
@@ -67,9 +71,10 @@ export default function Grid() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${grid.length}, ${tileSize}px)`,
-            gridTemplateRows: `repeat(${grid[0].length}, ${tileSize}px)`,
-						border: "2px black solid",
+            gridTemplateColumns: `repeat(${grid.length}, 1fr)`,
+            aspectRatio: "1/1",
+            gap: 0,
+            margin: 0,
           }}
         >
           {grid.map((line, indexLine) => {
@@ -83,10 +88,8 @@ export default function Grid() {
                     color: selectedColor,
                   })
                 }
-								className="tile"
+                className="tile"
                 style={{
-                  width: tileSize,
-                  height: tileSize,
                   backgroundColor: colors[grid[indexLine][indexTile]],
                 }}
               ></div>
