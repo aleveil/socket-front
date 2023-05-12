@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { socket } from "./socket";
 import ConnectionManager from "./components/ConnectionManager";
 import Grid from "./components/Grid";
+import Cooldown from "./components/Cooldown";
 function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
 
@@ -33,6 +34,7 @@ function App() {
       }}
     >
       {isConnected && <Grid />}
+      {isConnected && <Cooldown />}
       <ConnectionManager isConnected={isConnected} />
     </div>
   );

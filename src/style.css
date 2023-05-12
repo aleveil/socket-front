@@ -1,4 +1,11 @@
+body {
+	background-color: #222;
+	color: #EEE;
+	font-family: sans-serif;
+}
+
 .tile:hover {
   outline: 1px solid black;
+	border: 1px solid white;
 	z-index: 20;
 }
